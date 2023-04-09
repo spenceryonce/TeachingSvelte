@@ -1,2 +1,10 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+    import Inventory from './Inventory.svelte';
+</script>
+
+
+<main class="container">
+    <h1>Teaching Svelte</h1>
+    <Inventory />
+    
+</main>
