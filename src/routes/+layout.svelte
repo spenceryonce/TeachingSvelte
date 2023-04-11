@@ -1,14 +1,20 @@
 <script>
-    function swapTheme(){
-        console.log("swap theme");
+    import { onMount } from "svelte";
+
+    onMount(() => {
         const html = document.querySelector('html');
-        const currentTheme = html?.getAttribute("data-theme");
-        if(currentTheme === "dark") {
-            html?.setAttribute("data-theme", "light");
-        } else {
-            html?.setAttribute("data-theme", "dark");
+        const themeSwitcher = document.getElementById("theme-switcher");
+
+        html?.setAttribute("data-theme", "dark");
+        
+        function swapTheme(){
+            const currentTheme = html?.getAttribute("data-theme");
+            const themeSelection = currentTheme === "dark" ? "light" : "dark";
+            html?.setAttribute("data-theme", themeSelection);
         }
-    }
+
+        themeSwitcher?.addEventListener("click", swapTheme);
+    });
 </script>
 
 <header>
@@ -18,17 +24,26 @@
     </nav>
 </header>
 
-<div class="theme-switcher" on:keydown={swapTheme}>
+<div class="theme-switcher" id="theme-switcher">
     <i class="switcher"></i>
 </div>
 
 <slot />
 
-
 <style>
     :root {
         --transition: 0.2s ease-in-out;
+        --primary: rgb(121, 22, 220);
+        --primary-hover: rgb(82, 15, 148);
+        --primary-focus: rgb(94, 15, 173);
+        --primary-inverse: #FFF;
+
+        --form-element-active-border-color: var(--primary);
+        --form-element-focus-color: var(--primary-focus);
+        --switch-color: var(--primary-inverse);
+        --switch-checked-background-color: var(--primary);
     }
+
 
     .theme-switcher {
         position: fixed;
